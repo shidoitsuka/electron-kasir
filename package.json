@@ -1,0 +1,15 @@
+{
+  "name": "electron-kasir",
+  "version": "0.1.0",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "repository": "electron-kasir",
+  "author": "shidoitsuka",
+  "license": "MIT",
+  "private": false,
+  "devDependencies": {
+    "electron": "^6.0.11"
+  }
+}
