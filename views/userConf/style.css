@@ -1,0 +1,29 @@
+.body-container {
+  max-width: 99%;
+  margin: 0 auto;
+}
+
+.app-head {
+  text-align: center;
+}
+
+.app-body {
+  min-width: 100%;
+  padding: 25px;
+  display: table;
+  background-color: #333;
+}
+
+.cards {
+  max-width: 33%;
+  float: left;
+  padding: 5px;
+}
+
+.card-title {
+  color: black;
+}
+
+.card-image img {
+
+}
