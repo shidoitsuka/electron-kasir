@@ -1,0 +1,11 @@
+.body-container {
+  margin: 0 auto;
+  max-width: 99%;
+  text-align: center;
+}
+
+.app-body {
+  min-width: 500px;
+  display: inline-block;
+  padding: 25px;
+}

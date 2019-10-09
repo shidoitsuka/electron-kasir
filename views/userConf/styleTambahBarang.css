@@ -1,0 +1,15 @@
+.body-container {
+  max-width: 99%;
+  margin: 0 auto;
+}
+
+.app-body {
+  min-width: 100%;
+  padding: 25px;
+  text-align: center;
+}
+
+.card-container {
+  min-width: 500px;
+  display: inline-block;
+}

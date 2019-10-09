@@ -5,6 +5,7 @@ const loadAppWindow = () => {
   wind = new BrowserWindow({
     width: 800,
     height: 600,
+    icon: `${__dirname}/assets/pictures/icon.png`,
     webPreferences: {
       nodeIntegration: true
     }

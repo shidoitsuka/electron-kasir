@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <script type="text/javascript">
+    const $ = jQuery = require("jquery");
+  </script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="userConf/styleTambahBarang.css" />
+  <script src="userConf/scriptTambahBarang.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="../assets/css/materialize.min.css" />
+  <script src="../assets/js/materialize.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $('select').formSelect();
+    });
+  </script>
+</head>
+
+<body>
+  <div class="body-container">
+    <div class="app-body">
+      <h1>Form Tambah Barang Baru</h1>
+      <hr>
+      <br>
+      <div class="card-container">
+        <div class="input-field">
+          <input id="namaBarang" type="text" class="validate" autofocus>
+          <label for="namaBarang">Nama Barang</label>
+        </div>
+        <div class="input-field">
+          <input id="hargaBarang" type="number" class="validate">
+          <label for="hargaBarang">Harga Barang</label>
+        </div>
+        <div class="input-field col s12">
+          <select id="tipeBarang">
+            <option disabled selected>Pilih Tipe Barang</option>
+            <option value="kg">Kg</option>
+            <option value="qty">Qty</option>
+            <option value="liter">Liter</option>
+            <option value="box">Box</option>
+          </select>
+        </div>
+        <a class="waves-effect waves-light btn" onclick="tambah()">Tambah Barang</a>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

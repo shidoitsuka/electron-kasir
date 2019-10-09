@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <script type="text/javascript">
+    const $ = (jQuery = require("jquery"));
+    const fs = require("fs");
+    const db = JSON.parse(fs.readFileSync("./assets/db/barang.json"));
+    const option = Object.keys(db);
+  </script>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="userConf/stylePembelian.css" />
+  <script src="userConf/scriptPembelian.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="../assets/css/materialize.min.css" />
+  <script src="../assets/js/materialize.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $("select").formSelect();
+      $("#jumlahBarang").hide();
+      $("#tambahBeli-btn").hide();
+      $("#proses-btn").hide();
+    });
+  </script>
+</head>
+
+<body>
+  <div class="body-container">
+    <h1>Pembelian</h1>
+    <hr />
+    <div class="app-body">
+      <div class="input-field">
+        <select id="barang" onchange="updateHarga()">
+          <option value="" disabled selected>Pilih Barang</option>
+          <script type="text/javascript">
+            option.forEach(val => {
+              document.write(`<option value="${val}">${val}</option>`);
+            });
+          </script>
+        </select>
+      </div>
+
+      <input id="jumlahBarang" oninput="updateTotal()" type="number" class="validate" autofocus />
+      <p id="total"></p>
+      <a id="tambahBeli-btn" class="waves-effect waves-light btn" onclick="tambahBeli()">Tambah Pembelian</a>
+      <a id="proses-btn" class="waves-effect waves-light btn" onclick="proses()">Proses</a>
+    </div>
+  </div>
+</body>
+
+</html>
