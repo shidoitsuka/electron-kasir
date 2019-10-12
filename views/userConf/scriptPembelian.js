@@ -116,5 +116,6 @@ const selesai = () => {
       if (err) console.log(err);
     }
   );
+  window.alert("Pembelian Sukses!");
   location.reload();
 };
