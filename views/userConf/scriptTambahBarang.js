@@ -18,6 +18,7 @@ const tambah = () => {
     fs.writeFileSync("./assets/db/barang.json", JSON.stringify(db), err => {
       if (err) console.log(err);
     });
-    return window.alert(`Berhasil Menambahkan ${namaBarang}`);
+    window.alert(`Berhasil Menambahkan ${namaBarang}`);
+    location.reload();
   }
 };
