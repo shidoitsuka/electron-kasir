@@ -3,72 +3,127 @@
 
 <head>
   <script type="text/javascript">
-    const $ = jQuery = require("jquery");
+    const $ = (jQuery = require("jquery"));
+    const fs = require("fs");
+    let db = JSON.parse(fs.readFileSync("./assets/db/barang.json"));
+    const option = Object.keys(db);
+    let pembeliandb = JSON.parse(
+      fs.readFileSync("./assets/db/pembelian.json")
+    );
+    const pembelianOption = Object.keys(pembeliandb);
+    toMoney = (num) => {
+      return num.toFixed(2).replace(/\d(?=(\d{3})+\.)/g, "$&,");
+    };
   </script>
   <meta charset="utf-8" />
+
+  <link rel="stylesheet" href="userConf/styleTambahBarang.css" />
+  <script src="userConf/scriptTambahBarang.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="userConf/styleGudang.css" />
+  <script src="userConf/scriptGudang.js" charset="utf-8"></script>
+  <link rel="stylesheet" href="userConf/stylePembelian.css" />
+  <script src="userConf/scriptPembelian.js" charset="utf-8"></script>
   <link rel="stylesheet" href="userConf/style.css" />
   <script src="userConf/script.js" charset="utf-8"></script>
   <link rel="stylesheet" href="../assets/css/materialize.min.css" />
   <script src="../assets/js/materialize.min.js" charset="utf-8"></script>
+  <script type="text/javascript">
+    $(document).ready(function() {
+      $(".tabs").tabs();
+      $("select").formSelect();
+      $("select").formSelect();
+      $("#jumlahBarang").hide();
+      $("#tambahBeli-btn").hide();
+      $("#proses-btn").hide();
+      $("table").hide();
+      $("#selesai-btn").hide();
+    });
+  </script>
 </head>
 
 <body>
-  <div class="body-container">
-    <div class="app-head">
-      <h1>Kasir</h1>
-      <h3>Apa yang ingin anda lakukan?</h3>
+  <div class="container">
+    <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
+      <li class="tab"><a href="#tabPembelian">Pembelian</a></li>
+      <li class="tab">
+        <a class="active" href="#tabTambahBarang">Tambah Barang</a>
+      </li>
+      <li class="tab"><a href="#tabGudang">Gudang</a></li>
+    </ul>
+    <div id="tabPembelian" class="col s12">
+      <div class="input-field">
+        <select id="barang" onchange="updateHarga()">
+          <option value="" disabled selected>Pilih Barang</option>
+          <script type="text/javascript">
+            option.forEach(val => {
+              document.write(`<option value="${val}">${val}</option>`);
+            });
+          </script>
+        </select>
+      </div>
+      <input id="jumlahBarang" oninput="updateTotal()" type="number" class="validate" autofocus />
+      <p id="total"></p>
+      <a id="tambahBeli-btn" class="waves-effect waves-light btn" onclick="tambahBeli()">Tambah Ke Troli</a>
+      <a id="proses-btn" class="waves-effect waves-light btn" onclick="proses()">Proses</a>
+      <a id="selesai-btn" class="waves-effect waves-light btn" onclick="selesai()">Selesai</a>
+      <div class="troli">
+        <table id="tableTroli" class="striped">
+          <thead>
+            <tr class="table-title">
+              <td>Nama Barang</td>
+              <td>Harga</td>
+              <td>Jumlah</td>
+              <td>Sub-total</td>
+            </tr>
+          </thead>
+          <tbody id="pembelian"></tbody>
+        </table>
+      </div>
     </div>
-    <div class="app-body">
 
-      <div class="row cards">
-        <div class="s12 m7">
-          <div class="card">
-            <div class="card-image">
-              <img src="../assets/pictures/add.png">
-              <span class="card-title">Tambah Barang</span>
-            </div>
-            <div class="card-content">
-              <p>Pilih menu ini untuk menambah barang baru</p>
-            </div>
-            <div class="card-action">
-              <a href="tambah-barang.html">Klik Disini</a>
-            </div>
-          </div>
-        </div>
+    <div id="tabTambahBarang" class="col s12">
+      <div class="input-field">
+        <input id="namaBarang" type="text" class="validate" />
+        <label for="namaBarang">Nama Barang</label>
       </div>
-      <div class="row cards">
-        <div class="s12 m7">
-          <div class="card">
-            <div class="card-image">
-              <img src="../assets/pictures/setting.png">
-              <span class="card-title">Gudang</span>
-            </div>
-            <div class="card-content">
-              <p>Pilih menu ini untuk konfigurasi barang anda</p>
-            </div>
-            <div class="card-action">
-              <a href="#">Klik Disini</a>
-            </div>
-          </div>
-        </div>
+      <div class="input-field">
+        <input id="hargaBarang" type="number" class="validate" />
+        <label for="hargaBarang">Harga Barang</label>
       </div>
-      <div class="row cards">
-        <div class="s12 m7">
-          <div class="card">
-            <div class="card-image">
-              <img src="../assets/pictures/minus.png">
-              <span class="card-title">Pembelian</span>
-            </div>
-            <div class="card-content">
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit</p>
-            </div>
-            <div class="card-action">
-              <a href="pembelian.html">Klik Disini</a>
-            </div>
-          </div>
-        </div>
+      <div class="input-field col s12">
+        <select id="tipeBarang">
+          <option value="" disabled selected>Pilih Tipe Barang</option>
+          <option value="kg">Kg</option>
+          <option value="qty">Qty</option>
+          <option value="liter">Liter</option>
+          <option value="box">Box</option>
+        </select>
       </div>
+      <a class="waves-effect waves-light btn" onclick="tambah()">Tambah Barang</a>
+    </div>
 
+    <div id="tabGudang" class="col s12">
+      <div class="input-field col s5">
+        <select id="selectGudang" onchange="updateTabel()">
+          <option value="" disabled selected>Pilih Tanggal</option>
+          <script type="text/javascript">
+            pembelianOption.forEach(v => {
+              document.write(`<option value="${v}">${v}</option>`);
+            });
+          </script>
+        </select>
+      </div>
+      <table id="tableGudang" class="highlight">
+        <thead>
+          <th>Jam</th>
+          <th>Nama Barang</th>
+          <th>Harga</th>
+          <th>Jumlah</th>
+          <th>Sub-total</th>
+          <th>Total</th>
+        </thead>
+        <tbody id="gudang"></tbody>
+      </table>
     </div>
   </div>
 </body>
