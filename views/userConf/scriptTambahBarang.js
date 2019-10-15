@@ -1,7 +1,4 @@
-const fs = require("fs");
-
 const tambah = () => {
-  let db = JSON.parse(fs.readFileSync("./assets/db/barang.json"));
   const namaBarang = document.getElementById("namaBarang").value.toLowerCase();
   const hargaBarang = document.getElementById("hargaBarang").value;
   const tipeBarang = document.getElementById("tipeBarang").value;
