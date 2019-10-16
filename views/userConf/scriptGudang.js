@@ -14,8 +14,8 @@ const updateTabel = () => {
         <td>${toMoney(harga)}</td>
         <td>${jumlah}</td>
         <td>${toMoney(subtotal)}</td>
-        <td>${toMoney(total)}</td>
         </tr>`);
+      // <td>${toMoney(total)}</td>
       $("#tableGudang").show();
     });
   });
