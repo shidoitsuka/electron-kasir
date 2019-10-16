@@ -31,7 +31,7 @@ const tambahBeli = () => {
     <td>${namaBarang}</td>
     <td style="text-align:center;">${harga}</td>
     <td style="text-align:center;">${jumlah}</td>
-    <td style="text-align:center;" class="subtotal">${total}</td>
+    <td style="text-align:center;" class="subtotal"><input type="number" value="${total}"></td>
     <td class="hapusBarang"><a style="cursor: pointer;" onclick="(this.parentElement).parentElement.remove();">❌</a></td>
   $("#total").fadeOut(300);
   </tr>`);
@@ -45,14 +45,14 @@ let total = [];
 const proses = () => {
   const elements = document.getElementsByClassName("subtotal");
   for (var j = 0; j < elements.length; j++) {
-    total.push(parseInt(elements[j].innerHTML));
+    total.push(parseInt(elements[j].children[0].value));
   }
   $("#pembelian").append(`<tr>
     <th style="text-align:center;" colspan="3">Total</th>
     <td style="text-align:center;">${total.reduce((a, b) => a + b)}</td>
     </tr>`);
   $(".hapusBarang").remove();
-  $(".input-field").fadeOut(250);
+  $(".pembelian").fadeOut(250);
   $("#total").fadeOut(250);
   $("#proses-btn").fadeOut(250);
   $("#selesai-btn").fadeIn(250);
@@ -89,7 +89,7 @@ const selesai = () => {
     nama.push(unit[i].children[0].innerHTML);
     harga.push(parseInt(unit[i].children[1].innerHTML));
     jumlah.push(parseInt(unit[i].children[2].innerHTML));
-    subtotal.push(parseInt(unit[i].children[3].innerHTML));
+    subtotal.push(parseInt(unit[i].children[3].children[0].value));
   }
   for (var i = 0; i < nama.length; i++) {
     nest(
