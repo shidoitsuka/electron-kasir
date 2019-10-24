@@ -29,6 +29,9 @@
   <link rel="stylesheet" href="userConf/styleGudang.css" />
   <script src="userConf/scriptGudang.js" charset="utf-8"></script>
 
+  <!-- userConf untuk edit harga -->
+  <script src="userConf/scriptEditHarga.js" charset="utf-8"></script>
+
   <!-- userConf untuk index -->
   <link rel="stylesheet" href="userConf/style.css" />
   <script src="userConf/script.js" charset="utf-8"></script>
@@ -39,7 +42,7 @@
   <script type="text/javascript">
     $(document).ready(function() {
       $(".tabs").tabs();
-      $("select").formSelect();
+      $(".fieldEditHarga").hide();
       $("select").formSelect();
       $("#jumlahBarang").hide();
       $("#tambahBeli-btn").hide();
@@ -54,11 +57,12 @@
   <div class="container">
     <!-- fixed tab -->
     <ul class="tabs tabs-fixed-width tab-demo z-depth-1">
-      <li class="tab"><a href="#tabPembelian">Pembelian</a></li>
       <li class="tab">
-        <a class="active" href="#tabTambahBarang">Tambah Barang</a>
+        <a class="active" href="#tabPembelian">Pembelian</a>
       </li>
+      <li class="tab"><a href="#tabTambahBarang">Tambah Barang</a></li>
       <li class="tab"><a href="#tabGudang">Gudang</a></li>
+      <li class="tab"><a href="#tabEditHarga">Edit Harga</a></li>
     </ul>
 
     <!-- pembelian -->
@@ -138,6 +142,22 @@
         </thead>
         <tbody id="gudang"></tbody>
       </table>
+    </div>
+
+    <div id="tabEditHarga" class="col s12">
+      <div class="input-field col s6">
+        <select id="selectEditHarga" onchange="showEditHarga()">
+          <option value="" disabled selected>Pilih Barang</option>
+          <script type="text/javascript">
+            option.forEach(val => {
+              document.write(`<option value="${val}">${val}</option>`);
+            });
+          </script>
+        </select>
+      </div>
+      <div class="input-field fieldEditHarga">
+        <input id="editHarga" type="number" class="validate" />
+      </div>
     </div>
   </div>
 </body>
