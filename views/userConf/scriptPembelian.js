@@ -88,7 +88,7 @@ const selesai = () => {
   for (var i = 0; i < unit.length; i++) {
     nama.push(unit[i].children[0].innerHTML);
     harga.push(parseInt(unit[i].children[1].innerHTML));
-    jumlah.push(parseInt(unit[i].children[2].innerHTML));
+    jumlah.push(parseFloat(unit[i].children[2].innerHTML));
     subtotal.push(parseInt(unit[i].children[3].children[0].value));
   }
   for (var i = 0; i < nama.length; i++) {
